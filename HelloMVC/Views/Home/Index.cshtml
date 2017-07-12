@@ -1,12 +1,28 @@
 ﻿@model List<HelloMVC.Models.Car>
 @{
     ViewBag.Title = "Index";
+
+    var value = 100;
 }
 
 <h2>@ViewBag.DanielCreatedThis</h2>
 
+
+@{
+    value = value + 10;
+
+ }
+
+@{ 
+    var name = "Daniel";
+    var day = DateTime.Now.DayOfWeek.ToString();
+
+    <p>Howdy, @name. To day is @day</p>
+}
+
+<p>Value : @value.ToString("C")</p>
 @foreach (var car in Model)
-{
+    {
     <p>@car.Id - @car.Model - @car.Make</p>
 }
 
