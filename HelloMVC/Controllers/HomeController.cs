@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HelloMVC.Models;
 using System.Web.Mvc;
 
 namespace HelloMVC.Controllers
@@ -10,9 +11,10 @@ namespace HelloMVC.Controllers
     {
         public ActionResult Index()
         {
+            var cars = HelloModel.GetCars();
+            ViewBag.DanielCreatedThis = "Daniel Created this";
 
-
-            return View();
+            return View(cars);
         }
     }
 }
