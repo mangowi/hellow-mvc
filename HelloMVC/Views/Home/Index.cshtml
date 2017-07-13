@@ -11,18 +11,103 @@
 @{
     value = value + 10;
 
- }
+}
 
-@{ 
+@{
     var name = "Daniel";
     var day = DateTime.Now.DayOfWeek.ToString();
 
     <p>Howdy, @name. To day is @day</p>
+    <p>HOwdy, @name, we want to plurize @(day)s is the best?</p>
+}
+
+@{
+    var productId = 123;
+    <p>Product ID: ACME@(productId)</p> //() signal razor that at symbol has been made to access productId
 }
 
 <p>Value : @value.ToString("C")</p>
-@foreach (var car in Model)
-    {
-    <p>@car.Id - @car.Model - @car.Make</p>
+
+@*
+    @foreach (var car in Model)
+        {
+        <p>@car.Id - @car.Model - @car.Make</p>
+    }
+*@
+
+
+
+@helper pluralizeChildren(int childcount)
+{
+    @(childcount == 1 ? "child" : "children");
 }
 
+
+
+@{
+    var childCount = 1;
+    var childCount2 = 8;
+
+    <p>I have @childCount @pluralizeChildren(@childCount)</p>
+    <p>I have @childCount2 @pluralizeChildren(@childCount2)</p>
+
+}
+
+
+@helper pluralize(int amount, string singular, string plural)
+{
+    @(amount == 1 ? singular : plural)
+
+
+}
+
+
+@{
+    var crisesCount = 2;
+    <p>Mr. President, there @pluralize(crisesCount, "is one cirsis", "are " + crisesCount + " crises") you must deal with it immediately</p>
+}
+
+
+@* This is a comment in Razor syntax*@
+
+<p>
+    Mr. President, there
+    @if (crisesCount == 1)
+    {
+        <span>is one crisis</span>
+    }
+    else
+    {
+        <span>are @crisesCount crises</span>
+    }
+    you must deal with it immediately
+</p>
+
+
+<p>
+    @{
+        var test = false;
+        if (!test)
+        {
+            @:Display This  @*Then display this*@
+
+            <span>
+                Now is the time for all good men to come to aid their nchi
+
+            </span>
+        }
+    }
+
+</p>
+
+@for (int i = 0; i < 10; i++)
+{
+      @*d*@ <p>i</p> @*same as <p>i<p>*@
+}
+
+@*Escape character i.e Want to have handle for your twitter username*@
+<p>@@danielmangowi</p>
+
+@*You can escape by the use of @ symbol*@
+
+@*Razor syntax, makes it easy to switch between csharp and html, inline, code block, mixed expression*@
